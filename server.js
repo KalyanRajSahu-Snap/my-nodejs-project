@@ -98,3 +98,15 @@ app.get('/listSchools', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+app.get('/api/schools', (req, res) => {
+  const sql = 'SELECT * FROM schools';
+  db.query(sql, (err, results) => {
+      if (err) {
+          console.error('Error fetching schools:', err);
+          res.status(500).json({ error: 'Failed to retrieve schools' });
+      } else {
+          res.json(results);
+      }
+  });
+});
